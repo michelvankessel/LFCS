@@ -93,7 +93,7 @@ Process States:
 * Stopped
 * Zombie
 
-Use '<$ ulimits>' to control limits
+Use `$ ulimits` to control limits
 
 User Mode Vs Kernel Mode
 * User Mode: Each process is isolated in its own user space to protect it from 
