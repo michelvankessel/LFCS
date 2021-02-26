@@ -7,6 +7,8 @@ Data Distinctions:
 * Variable vs Static
 
 Main Directories:
+Directory | Purpose
+--------- | -------
 /         | Primary directory of entire FHS
 /bin      | Essential exec programs that must be available in single user mode
 /boot     | Files needed to boot system like kernel, initrd, boot config, ...
