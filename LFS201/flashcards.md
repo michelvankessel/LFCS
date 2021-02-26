@@ -14,3 +14,10 @@
 * Used to change max # of open file to 2048 - ulimit -n 2048
 * Set niceness to 5 units of process with PID 444 - renice (+)5 444
 * A process in zombie state - has terminated but no other process has asked about its exit state
+
+### 4 - Signals
+
+* kill, killall, pkill all accept process name as parameter - False
+* Passing -SIGKILL & -9 have the same effect on target process - True
+* If not specified, kill will send SIGTERM by default - True
+* Pressing Ctrl-Z or using kill -SIGTSTP have same effects - True

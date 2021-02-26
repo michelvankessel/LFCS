@@ -120,3 +120,11 @@ Static libaries vs Shared Libraries (DLLs)
 time and doesn't change thereafter, even if the libary updates. 
 * Shared: code is inserted at run time, and if library is changed later, the
 running program will run with those libarary modifications. Has '.so' extension.
+
+### 4 - Signals
+
+Explain what signals are and how they are used
+
+Discuss available signals & types of signals available in Linux
+
+Use kill, killall & pkill to send signals from the command line
