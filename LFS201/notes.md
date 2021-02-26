@@ -1,7 +1,23 @@
 ## Notes LFS201
+### Learning Objectives Answered
 #### Anvesh G. Jhuboo
 
 ### 2 - Linux Filesystem Tree Layout
+Linux requires the organization of one big filesystem tree as this standardizes
+the various distinct filesystems, and makes it easier for developing applications
+and accomplishing system adminstration tasks.
+
+The Filesystem Hierarchy Standard specifies the main directories that need to be
+present and describes their purposes. This simplifies predictions of file 
+locations.
+
+At boot, the following must be available in the root(/) directory: /bin, /boot,
+/lib, /sbin
+
+Only once the system is started are the following directories available: /dev,
+/etc, /home, /mnt, /opt, /proc, /sys, /srv, /tmp, /usr, /var
+
+
 Data Distinctions:
 * Shareable vs Non-shareable
 * Variable vs Static
