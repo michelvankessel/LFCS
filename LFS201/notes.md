@@ -65,7 +65,6 @@ executed asynchronously. These threads of execution can share various resources,
 such as their memory spaces, open files, etc. Each thread returns the same
 process ID (thread group ID) while returning a distinct thread ID (process ID).
 
-understand process attributes, perm, states + how to cntl limits
 Process attributes include:
 * The program being executed
 * Context (state)
@@ -78,12 +77,46 @@ Process attributes include:
     * environment, file hangles, signal handlers, allocated memory, ...
 
 
-diff between user vs kernel mode
+Process Permissions:
+* Effective User ID (effective UID)
+    * when a process is launched, it runs with the same permissions as the user
+    or group that ran it. Used to grant access rights to a process.
+* Real User ID (real UID)
+    * this is the ID of the user that launched the process.
+* Saved User ID (saved UID)
+    * allows a process to switch between effective UID and real UID
+    * use to escalate priviledges (setuid programs)
 
-daemon process
+Process States:
+* Running
+* Sleeping (Waiting)
+* Stopped
+* Zombie
 
-forking new process
+Use '<$ ulimits>' to control limits
 
-use nice & renice to set/modify priorities
+User Mode Vs Kernel Mode
+* User Mode: Each process is isolated in its own user space to protect it from 
+other processes. This process resoucre isolation promotes security & stability. 
+* Kernel (System) Mode: CPU has full access to all hardware on system. 
+If application needs acces to these resources, it must issue a system call.
 
-how shared & static lib used
+A demon process is a background process whose sole purpose is to provide some
+specific service to users of the system. Examples include httpd & systemd-udevd.
+
+A linux system is always creating new process - this is called forking, whereby
+the parent keeps running, while a new child process starts.
+Often rather than fork, one follows it with *exec* where the parent process
+terminates, and the child process inherits the process ID of the parent.
+
+nice & renice can be used to set priorities
+```
+$ nice -5 command [ARGS]
+$ renice +5 -p <pid>
+```
+
+Static libaries vs Shared Libraries (DLLs)
+* Static: code for the library functions is inserted into the program at compile
+time and doesn't change thereafter, even if the libary updates. 
+* Shared: code is inserted at run time, and if library is changed later, the
+running program will run with those libarary modifications. Has '.so' extension.
