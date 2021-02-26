@@ -123,8 +123,40 @@ running program will run with those libarary modifications. Has '.so' extension.
 
 ### 4 - Signals
 
-Explain what signals are and how they are used
+Signals are used to notify processes about asynchornous events (or exceptions).
+* There are two ways in which signals are sent to processes:
+    * From the kernel to the user process, as a result of an exception
+    or a programming error
+    * From a user process using a system call to the kernel which will then send
+    it to the user process. 
 
-Discuss available signals & types of signals available in Linux
+Using `kill -l` lists all the available signals
+The most important ones include
+* SIGKILL -9    : Kill signal, cannot be caught or ignored
+* SIGTERM -15   : Process termination (default)
+* SIGSTOP -19   : Stop process, cannot be caught or ignored
 
-Use kill, killall & pkill to send signals from the command line
+Users can send signals to other processes using `kill <process-id>`
+
+The term kill is a really bad name, because the command real function is to
+send any and all signals, not limited to killing, to processes.
+
+killall kills all process with a given name. `killall <process-name>`
+
+pkilll sengs a signal to a process using selection criteria.
+`pkill <process-name>`
+
+
+### 5 - Package Management Systems
+
+Explain why spms are necessary
+
+Understand function of both binary and source packages
+
+Enumerate main available package management system
+
+Understand why two levels of utilities are needed
+
+Explain how creating your own packages enhances the control you have
+
+Understand the role of source control systems, and git in particular
