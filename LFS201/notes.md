@@ -48,3 +48,42 @@ Directory | Purpose
 
 
 ### 3 - Processes
+
+A process is an instance of an executing program, and associated resources. These resources include environment, file handles, signal handlers, allocated memory ...
+
+The init process is the first user process run on a system. It is thus the 
+ancestor of all subsequent processes running on the system, except those directly
+initiated by the kernel (which show up with [] around their name in ps listing).
+
+A program is a set of instructions along with any internal data used while
+carrying the instructions out. The same program may be executing more than once
+and hence be responsible for multiple processes.
+
+A thread, or thread of execution, is the smallest unit of processing that a 
+scheduler can work on. A process can have multiple threads of execution which are
+executed asynchronously. These threads of execution can share various resources,
+such as their memory spaces, open files, etc. Each thread returns the same
+process ID (thread group ID) while returning a distinct thread ID (process ID).
+
+understand process attributes, perm, states + how to cntl limits
+Process attributes include:
+* The program being executed
+* Context (state)
+    * A snapshot of the process trapping the state of its CPU registers, where it
+    is executing the program, what is in the process' memory & other infomation 
+    * Context switching: being able to store the entire context when swapping out
+    the process, and being able to restore it upon execution redemption
+* Permissions
+* Associated resources
+    * environment, file hangles, signal handlers, allocated memory, ...
+
+
+diff between user vs kernel mode
+
+daemon process
+
+forking new process
+
+use nice & renice to set/modify priorities
+
+how shared & static lib used
