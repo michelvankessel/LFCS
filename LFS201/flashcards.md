@@ -21,3 +21,8 @@
 * Passing -SIGKILL & -9 have the same effect on target process - True
 * If not specified, kill will send SIGTERM by default - True
 * Pressing Ctrl-Z or using kill -SIGTSTP have same effects - True
+
+### 5 - Package Management Systems
+
+* Packaging system used by RHEL, SUSE, CentOS & Fedora: rpm
+* Git was originally created by Linus Torvalds.

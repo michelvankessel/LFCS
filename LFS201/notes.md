@@ -149,14 +149,56 @@ pkilll sengs a signal to a process using selection criteria.
 
 ### 5 - Package Management Systems
 
-Explain why spms are necessary
+Package Management Systems make it easy to automate installing, upgrading,
+configuring, and removing software packages in a know, predictable and
+consistent manner. They make it easy for installation processes to scale to
+thousands of systems without requiring manual work on each individual system.
 
-Understand function of both binary and source packages
+Binary vs Source Packages
+* Binary: contain files ready for deployment, including executables and 
+libarries. They are architecture dependent, and must be compiled for each.
+* Source: used to generate binary packages. Allows to rebuild a binary package
+from the source package. Can be used for many architectures.
 
-Enumerate main available package management system
+Main Two Packaging System
+* rpm - used by RHEL, Fedora, Centos, SUSE & related openSUSE distributions
+* dpkg - used by Debian-derived distributions, like Debian, Ubuntu, ...
 
-Understand why two levels of utilities are needed
+Two level of utilities are available:
+* Low level utilities
+    * Installs or removes a single package, or a list of packages, each one of
+    which is individually & specifically named. Dependencies are not fully
+    handles, only warned about. If another package needs to installed, first
+    installation will fail. If package is needed by another package, removal
+    will fail.
+    * Examples are: *rpm & dpkg*
+* High level utilities
+    * Solves dependency problems.
+    * Examples are *apt & apt-cache* for dpkg systems
+    * Examples are *yum, dnf, zypper & PackageKit* for rpm systems
 
-Explain how creating your own packages enhances the control you have
+Creating your own packages allows you to control what exackly goes in the
+software and exactly how it is established. It can be used to perform the
+following tasks:
+* Creating needed symbolic links
+* Setting permissions
+* Creating directories as needed
+* Anything that can be scripted
 
-Understand the role of source control systems, and git in particular
+Git is a version control system, created by Linus Torvalds & primarily
+maintained by Junio C Hamano.
+
+
+### 6 - RPM
+
+Understand how RPM system is organized and what major operations the rpm
+program can accomplish
+
+Explain the naming conventions used for binary & source rpm files
+
+Query, verify, install, uninstall, upgrade & freshen packages
+
+Grasp why new kernels should be insalled, rather than upgraded
+
+Use rpm2cpio to copy packaged files into a cpio archive, as well as extract
+the files without installing them
