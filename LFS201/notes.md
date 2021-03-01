@@ -193,12 +193,40 @@ maintained by Junio C Hamano.
 
 Understand how RPM system is organized and what major operations the rpm
 program can accomplish
+RPM advantages:
+* Makes software packages easy to manage for Sysadmins
+    * Easy to determine which pkg a particular file is coming from
+    which version of pkg is installed, whether it is correctly installed or not
+    * Easy to remove pkgs to free up disk space
+    * Distinguishes documentation files from rest of pkg, giving the choice
+    to install documentation on the system
+* Makes software developer's job easier
+    * Allows builders to keep changes necessary for building on Linux separate
+    from the original source. This facilitates the incorporation of new versions
+    of the code as build-related changes are all in one place.
+    * Facilities building versions of Linux for different architectures.
 
-Explain the naming conventions used for binary & source rpm files
+Naming Conventions:
+* Binary package: <name>-<version>-<release>.<distro>.<architecture>.rpm
+* Source package: <name>-<version>-<release>.<distro>.src.rpm
 
 Query, verify, install, uninstall, upgrade & freshen packages
+`var/lib/rpm` - default dir that holds RPM database files
+* Query: `rpm -qi bash` Other flags include `-qfl -qa --requires --whatprovides`
+* Verify: `rpm -V bash`
+* Install: `sudo rpm -ivh bash-5.1.19-8.e18_0.x86_64`
+* Uninstall: `sudo rpm -e bash`
+* Upgrade: `rpm -Uvh bash`
+* Freshen: `sudo rpm -Fvh *.rpm`
 
-Grasp why new kernels should be insalled, rather than upgraded
+New kernels should be installed rather than upgraded, because if ever there are
+any problems, you can still boot in the old kernel. Once the new kernel has been
+tested, once then you can remove the old kernel. Unless you are short on space,
+it is recommended to keep one or more older kernels for safety.
 
-Use rpm2cpio to copy packaged files into a cpio archive, as well as extract
-the files without installing them
+rpm2cipo converts or extracts RPM package files to cpio archives
+* `rpm2cpio foobar.rpm > foobar.cpio`
+* `rpm2cpio bash-XXX.rpm | cpio -ivd bin/bash`
+
+### 7 -DPKG
+

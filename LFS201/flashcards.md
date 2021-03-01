@@ -26,3 +26,9 @@
 
 * Packaging system used by RHEL, SUSE, CentOS & Fedora: rpm
 * Git was originally created by Linus Torvalds.
+
+### 6 - RPM
+
+* rpm -qa lists all installed packages on the system - True
+* rpm -V coreutils verifies the integrity of the package /bin/ls which is
+provided by the coreutils package - True
