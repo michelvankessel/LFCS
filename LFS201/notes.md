@@ -191,8 +191,6 @@ maintained by Junio C Hamano.
 
 ### 6 - RPM
 
-Understand how RPM system is organized and what major operations the rpm
-program can accomplish
 RPM advantages:
 * Makes software packages easy to manage for Sysadmins
     * Easy to determine which pkg a particular file is coming from
@@ -229,4 +227,30 @@ rpm2cipo converts or extracts RPM package files to cpio archives
 * `rpm2cpio bash-XXX.rpm | cpio -ivd bin/bash`
 
 ### 7 -DPKG
+
+DPKG advantages & Uses
+* Same as RPM advantages, see above
+
+Naming conventions
+* Binary: <name>-<version>-<revision-number>-<architecture>.deb
+* Source: see below
+    * use `apt-get source <program_name>` to download source
+    * use `du -shc <program_name>*` to view all files downloaded from source
+
+Know what Source packages look like
+Source package consists of at least 3 files:
+* Unmodified source code: Upstream tarball ending in `.tar.gz`
+* Description file ending in `.dsc`
+* Second tarball containing patches & additional files ending in `.diff.gz`
+or `debian.tar.gz`
+
+Query & Verify operations on packages
+* `dpkg -I <pkg_file>` - show info about pkg file
+* `dpkg -V pkg` - verify pkg
+
+Install, upgrade, uninstall Debian packages
+* `sudo dpkg -i foobar.deb` - install or upgrade
+* `sudo dpkg -r package`    - remove
+* `sudo dpkg -P package`    - purge, includes config files
+
 

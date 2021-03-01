@@ -32,3 +32,8 @@
 * rpm -qa lists all installed packages on the system - True
 * rpm -V coreutils verifies the integrity of the package /bin/ls which is
 provided by the coreutils package - True
+
+### 7 -DPKG
+
+* dpkg -l lists all installed packages on the system - True
+
