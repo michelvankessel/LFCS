@@ -37,3 +37,12 @@ provided by the coreutils package - True
 
 * dpkg -l lists all installed packages on the system - True
 
+### 8 - YUM
+
+* `yum install package` is used to install a new package - True
+* `yum update` does not accept a package as argument - False
+* `yum provides file-path` cannot be used to find which package provides the file specified as the argument - False
+* `yum search` can be used for searching on package name and short description - True
+
+### 9 - ZYPPER
+

@@ -2,7 +2,9 @@
 ### Learning Objectives Answered
 #### Anvesh G. Jhuboo
 
+
 ### 2 - Linux Filesystem Tree Layout
+
 Linux requires the organization of one big filesystem tree as this standardizes
 the various distinct filesystems, and makes it easier for developing applications
 and accomplishing system adminstration tasks.
@@ -121,6 +123,7 @@ time and doesn't change thereafter, even if the libary updates.
 * Shared: code is inserted at run time, and if library is changed later, the
 running program will run with those libarary modifications. Has '.so' extension.
 
+
 ### 4 - Signals
 
 Signals are used to notify processes about asynchornous events (or exceptions).
@@ -226,6 +229,7 @@ rpm2cipo converts or extracts RPM package files to cpio archives
 * `rpm2cpio foobar.rpm > foobar.cpio`
 * `rpm2cpio bash-XXX.rpm | cpio -ivd bin/bash`
 
+
 ### 7 -DPKG
 
 DPKG advantages & Uses
@@ -254,3 +258,36 @@ Install, upgrade, uninstall Debian packages
 * `sudo dpkg -P package`    - purge, includes config files
 
 
+### 8 - YUM
+
+Discuss pkg installers and their characteristics
+
+yum provides a frontend to rpm. Its main task is to fetch packages from multiple
+remote repos and resolve dependencies among packages. It also caches infomation
+and databases to speed up performance.
+
+Repository config files for `yum` are kept in `/etc/yum.repos.d` and have a
+`.repo` extension. The use of a particular repo can be toggled on or off by 
+changing the value off enabled to 0 or 1, or using `--disablerepo=somerepo` and
+`--enablerepo=somerepo` when using yum.
+
+Queries
+* `yum search keyword`
+* `yum list "*keyword*"`
+* `yum info package-name`
+* `yum grouplist`
+* `yum groupinfo package-group`
+* `yum provides /path/to/file`
+
+Additonal
+* `yum verify [package]`
+* `yum install package1 [packages]`
+* `yum remove package1 [packages]`
+* `yum update pakage`
+
+learn abt additional cmds and how to install new repos
+To install a new repo:
+* Go to /etc/yum.repos.d
+* Create a repo file containing the following main things
+
+understand how to use dnf which has replaced yum on fedora
