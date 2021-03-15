@@ -262,9 +262,9 @@ Install, upgrade, uninstall Debian packages
 
 Discuss pkg installers and their characteristics
 
-yum provides a frontend to rpm. Its main task is to fetch packages from multiple
-remote repos and resolve dependencies among packages. It also caches infomation
-and databases to speed up performance.
+`yum` provides a frontend to `rpm`. Its main task is to fetch packages from 
+multiple remote repos and resolve dependencies among packages. It also caches 
+infomation and databases to speed up performance.
 
 Repository config files for `yum` are kept in `/etc/yum.repos.d` and have a
 `.repo` extension. The use of a particular repo can be toggled on or off by 
@@ -285,9 +285,17 @@ Additonal
 * `yum remove package1 [packages]`
 * `yum update pakage`
 
-learn abt additional cmds and how to install new repos
-To install a new repo:
+To install a new repo, say for example webmin:
 * Go to /etc/yum.repos.d
-* Create a repo file containing the following main things
+* Create a repo file, named webmin.repo, containing the following main things
+```
+[Webmin]
+name=Webmin Distribution Neutral
+baseurl=http://download.webmin.com/download/yum
+mirrorlist=http://download.webmin.com/download/yum/mirrorlist
+enabled=1
+gpgcheck=0
+```
+* install the webmin package using `sudo yum install webmin`
 
-understand how to use dnf which has replaced yum on fedora
+`dnf` is now replacing `yum`.
