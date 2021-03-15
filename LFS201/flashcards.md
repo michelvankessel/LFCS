@@ -53,3 +53,10 @@ provided by the coreutils package - True
 
 ### 10 - APT
 
+* `apt install <package>` is used to install a new package - True
+* `apt update` does not accpet a package as argument - True
+* `apt-file find <file_path>` can't be used to find which package provides the file specified as argument - False
+* `apt-cache search` can be used for searching on package name and short description - True
+
+### - SYSTEM MONITORING
+

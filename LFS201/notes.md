@@ -329,11 +329,39 @@ This has the added advantage that the databases are not re-read for each command
 
 ### 10 - APT
 
-Explain what APT is
+APT is used on Debian systems, it provides a higher level of intelligent services
+that use the underlying dpkg program. It plays the same role as `yum` and `zypper`
+on Red Hat based systems. It works with Debian packages that have the `.deb`
+extension.
 
-Perform package queries
+It should be noted that `apt` and `apt-get` are now equivalent.
 
-Clean up system information about packages
+Queries
+* `apt-cache search package`
+* `apt-cache show package`  - list basic info about package
+* `apt-cache showpkg package` - list detailed info about package
+* `apt-cache depends package` - list dependent packages for package
+* `apt-cache rdepends package` - list packages package depends on
+* `apt-file list package` - list all files in package
 
-Install, remove, and upgrade packages using apt
+Install, Remove, Upgrade
+* `apt update` synchronize package index files with their repo sources
+* `apt install [package]` - install or update already installed package
+* `apt remove [package]`
+* `apt --purge remove [package]` - remove package and its config files
+* `apt upgrade` - apply updates to packages already installed
+* `apt dist-upgrade` - do smart upgrade, with more thorough dependency resolution
+and remove obsolete packages, and install new dependencies
+* `apt autoremove` - get rid of packages not needed anymore
+* `apt clean` - clean cache files and any archived package files that have been installed
 
+
+### 11 - SYSTEM MONITORING
+
+Understand concept of inventory and gain familiarity with avaialbel system monitoring tools
+
+Understand where the system stores log files and examine the msot importatn ones
+
+Use the /proc an /sys pseudo-filesystems
+
+Use `sar` to gather system activity and performance data and create reports that are readable by humans
