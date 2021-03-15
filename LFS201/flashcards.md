@@ -46,3 +46,10 @@ provided by the coreutils package - True
 
 ### 9 - ZYPPER
 
+* `zypper install package` is used to install a new package - True
+* `zypper update` doesn't accept a package as argument - False
+* `zypper what-provides <file-path>` cannot be used to find which package provides the file specified in the argument - False
+* `zypper search` can be used for searching on package name and short description - True
+
+### 10 - APT
+

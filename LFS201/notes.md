@@ -299,3 +299,41 @@ gpgcheck=0
 * install the webmin package using `sudo yum install webmin`
 
 `dnf` is now replacing `yum`.
+
+
+### 9 - ZYPPER
+
+`zypper` is a high level command line tool for installing and managing packages
+on SUSE Linux and openSUSE. It is very similar to `yum`, and also works with
+`rpm` packages.
+
+Queries
+* `zypper list-updates`
+* `zypper repos`
+* `zypper search <string>`
+* `zypper info <package>`
+* `zypper search --provides /path/to/file`
+
+Install, Remove, Upgrade
+* `sudo zypper install <package>`
+* `sudo zypper update <optional-packages>`
+* `sudo zypper remove <package>`
+
+Advanced
+* `sudo zypper shell` allows a number of zypper commands to run in sequence.
+This has the added advantage that the databases are not re-read for each command.
+* `sudo zypper addrepo URI alias` - add a new repository, located at the supplied URI, and which will use supplied alias
+* `sudo zypper removerepo alias` - remove repository
+* `sudo zypper clean [-all]` - clean up and save space in `/var/cache/zypp`
+
+
+### 10 - APT
+
+Explain what APT is
+
+Perform package queries
+
+Clean up system information about packages
+
+Install, remove, and upgrade packages using apt
+
