@@ -68,4 +68,8 @@ provided by the coreutils package - True
 
 ### 12 - PROCESS MONITORING
 
+* ps, top, pstree are system monitoring tools
+* ps -elf shows the PPIDs for all the processes on the system
+
+### 13 - MEMORY MONITORING AND USAGE
 
