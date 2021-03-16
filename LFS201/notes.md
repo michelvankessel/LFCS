@@ -260,8 +260,6 @@ Install, upgrade, uninstall Debian packages
 
 ### 8 - YUM
 
-Discuss pkg installers and their characteristics
-
 `yum` provides a frontend to `rpm`. Its main task is to fetch packages from 
 multiple remote repos and resolve dependencies among packages. It also caches 
 infomation and databases to speed up performance.
