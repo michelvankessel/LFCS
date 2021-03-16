@@ -358,10 +358,81 @@ and remove obsolete packages, and install new dependencies
 
 ### 11 - SYSTEM MONITORING
 
-Understand concept of inventory and gain familiarity with avaialbel system monitoring tools
+Process & Load Monitoring Utilities
+Utility | Purpose
+------- | ------- 
+top     | Process activity, dynamically updated
+uptime  | how long system is running & average load
+ps      | detailed info about processes
+pstree  | a tree of processes & their connections
+mpstat  | multiple processor usage
+iostat  | CPU utilization & I/O statistics
+sar     | Display and collect information about system activity
+numastat| Information about NUMA (Non-Uniform Memory Architecture)
+strace  | Information about all system calls a process makes
 
-Understand where the system stores log files and examine the msot importatn ones
+Memory Monitoring Utilities
+Utility | Purpose
+------- | -------
+free    | Brief summary abt memory usage
+vmstat  | Detailed vm statistics & block I/O, dynamically updated
+pmap    | Process memory map
 
-Use the /proc an /sys pseudo-filesystems
+I/O Monitoring Utilities
+Utility | Purpose
+------- | -------
+iostat  | CPU utilization & I/O statistics
+sar     | Display & collect info about a system activity
+vmstat  | Detailed vm statistics & block I/O, dynamically updated
 
-Use `sar` to gather system activity and performance data and create reports that are readable by humans
+Network Monitoring Utilities
+Utility | Purpose
+------- | -------
+netstat | Detailed networking statistics
+iptraf  | Gather information on network interfaces
+tcpdump | Detailed analysis of network packets & traffic
+wireshark| Detailed network traffic analysis
+
+
+LOG FILES  
+System log files are stored under `/var/log`  
+Use `sudo tail -f /var/log/messages` or `/var/log/syslog` to view new msgs  
+Or `dmesg -w` to view only kernel-related msgs   
+
+Some important log files
+File                | Purpose
+----                | -------
+boot.log            | System boot messages
+dmesg               | Kernel msgs saved after boot.  
+messages or syslog  | All important system msgs
+secure              | Security-related msgs
+
+`logrotate` is used to prevent log files from growing out of bounds.
+
+
+PROC & SYS pseudo-filesystems  
+Most turnable system parameters can be found under `/proc/sys`  
+Viewing and changing parameters:  
+`$ cat /proc/sys/kernel/threads-max`  
+`$ sudo bash -c 'echo 100000 > /proc/sys/kernel/threads-max'`  
+`$ sudo sysctl kernel.threads-max=100000`  
+The /sys pseudofilesystem is more tightly defined that /proc. Most entries contain only one line of text.
+
+`sar` stands for Systems Activity Reporter. It is an all purpose tool for
+gathering system activity and performance data and creating reports that are
+readable by humans. The backend to sar is `sadc` (system activity data collector).
+
+`$ sar [options] [interval] [count]`
+
+
+### 12 - PROCESS MONITORING
+
+Use ps to view characteristics and statistics associated with processes
+
+idientify different ps output fields and customize the ps output
+
+Use pstress to ge a visual description of the prpcess ancestry and multi-threaded applications 
+
+Use top to view system loads interactively
+
+

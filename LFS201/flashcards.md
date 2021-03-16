@@ -58,5 +58,14 @@ provided by the coreutils package - True
 * `apt-file find <file_path>` can't be used to find which package provides the file specified as argument - False
 * `apt-cache search` can be used for searching on package name and short description - True
 
-### - SYSTEM MONITORING
+### 11 - SYSTEM MONITORING
+
+* A tracing & debugging tool that shows how a process make requests to the OS - `strace`
+* A tool that shows how long the system is running - `uptime`
+* An interactive tool for system monitoring - `top`
+* A tool that displays a summary of memory usage - `free`
+* What information that is not related to processes can be found at /proc? - All of the following: The Kernel command line, CPU model information, Memory Utilization Statistics, Disk Partition Information
+
+### 12 - PROCESS MONITORING
+
 
