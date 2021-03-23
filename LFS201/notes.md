@@ -486,13 +486,44 @@ the system. The order of killing is determined by this value.
 
 ### 14 - I/O MONITORING and TUNING
 
-Understand the importance o fmonitorign I/O activity and when it constitutes
-sytem performance bottlenecks
+A system can be considered I/O bound when:
+* the CPU is found sitting idle waiting for I/O to complete
+* Or the network is waiting to clear buffers
 
-Use iostat to monitor system I/O device activity
+It is easy to be misled as what appears as insufficient memory can result from too slow I/O. If the memory buffers are being used for reading and writing fill up, it may appear that the memory is the problem, when the actual problem is that buffers are not filling up or emptying fast enough.
 
-Use iotop to display a constantly updated table of current I/O usage
+`iostat` is used to monitor system I/O device activity
+* `iostat [options] [devices] [interval] [count]`
+    * This provides a brief summary of CPU utilization
+    * I/O statistics are then given such as tps (I/O transactions per second), etc
+    * Use `iostat -xk` to get more detailed reports
+    * When the **utilization percentage** approaches 100, the system is saturated, or I/O bound
 
-Use ionice to set both the I/O scheduling class and the priority for a given process
+`iotop` is used to display a constantly updated table of current I/O usage
+* `sudo iotop`
+    * `be` and `rt` entries in the PRIO field stand for best effort and real time
+    * use `iotop -o` to show only processes or threads actually doing I/O, this reduces clutter
+
+`ionice` is used to set both the I/O scheduling class and the priority for a given process
+* `ionice [-c class] [-n priority] [-p pid] [command [args]]
+    * The '-c' parameters specifies the I/O scheduling class
+    * The best effort and real time classes take the '-n' priority arguments, which gives the priority, which ranges from 0 (highest priority) to 7 (lowest)
+    * Example ~> `ionice -c 2 -n 3 -p 30076
+
+I/O Scheduling Class
+
+Scheudling Class | -C Value | Meaning
+---------------- | -------- | -------
+None or Unknown  | 0        | Default Value
+Real Time        | 1        | Get first access to disk, can starve other processes. The priority defines how big a time slice each process gets
+Best Effort      | 2        | All programs serviced in round-robin fashion, according to priority. The Default
+Idle             | 3        | No access to disk I/O unless no other program has asked for it for a defined period
 
 
+### 15 - I/O SCHEDULING
+
+Explain the importance of I/O scheduling and describe the conflicting requirements that need to be satisfied
+
+Delineate and contrast the options available under Linux
+
+Understand how the CFQ (Completely Fair Queue) and Deadline algorithms work

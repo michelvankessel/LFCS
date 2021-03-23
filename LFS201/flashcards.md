@@ -80,4 +80,9 @@ provided by the coreutils package - True
 
 ### 14 - I/O MONITORING and TUNING
 
+* ionice is used to configure the I/O priority of a process
+* `sudo iotop -o` will continuously show activity for all tasks currently doing I/O
+
+### 15 - I/O SCHEDULING
+
 
