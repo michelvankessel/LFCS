@@ -73,3 +73,11 @@ provided by the coreutils package - True
 
 ### 13 - MEMORY MONITORING AND USAGE
 
+* Disabling all swap partitions increases the chances of the sytem invoking the OOM-killer - True
+* Memory used for file caching has more priority than memory used by system processes. The OOM-killer is invoked if there is insufficient memory for both file caching and the user process. - False
+* What is moved to the swap area is never moved back to the main memory. - False
+* The field **MemFree** entry in `/proc/meminfo` shows the amt of memory that is not utilized, but the file caching could also be considered free memory as the kernel would release memory used by the cache if applications need more memory. - True
+
+### 14 - I/O MONITORING and TUNING
+
+

@@ -369,12 +369,6 @@ sar     | Display and collect information about system activity
 numastat| Information about NUMA (Non-Uniform Memory Architecture)
 strace  | Information about all system calls a process makes
 
-Memory Monitoring Utilities
-Utility | Purpose
-------- | -------
-free    | Brief summary abt memory usage
-vmstat  | Detailed vm statistics & block I/O, dynamically updated
-pmap    | Process memory map
 
 I/O Monitoring Utilities
 Utility | Purpose
@@ -392,10 +386,11 @@ tcpdump | Detailed analysis of network packets & traffic
 wireshark| Detailed network traffic analysis
 
 
-LOG FILES  
-System log files are stored under `/var/log`  
-Use `sudo tail -f /var/log/messages` or `/var/log/syslog` to view new msgs  
-Or `dmesg -w` to view only kernel-related msgs   
+LOG FILES 
+
+System log files are stored under `/var/log`
+Use `sudo tail -f /var/log/messages` or `/var/log/syslog` to view new msgs
+Or `dmesg -w` to view only kernel-related msgs 
 
 Some important log files
 File                | Purpose
@@ -408,12 +403,13 @@ secure              | Security-related msgs
 `logrotate` is used to prevent log files from growing out of bounds.
 
 
-PROC & SYS pseudo-filesystems  
-Most turnable system parameters can be found under `/proc/sys`  
-Viewing and changing parameters:  
-`$ cat /proc/sys/kernel/threads-max`  
-`$ sudo bash -c 'echo 100000 > /proc/sys/kernel/threads-max'`  
-`$ sudo sysctl kernel.threads-max=100000`  
+PROC & SYS pseudo-filesystems 
+
+Most turnable system parameters can be found under `/proc/sys`
+Viewing and changing parameters: 
+`$ cat /proc/sys/kernel/threads-max`
+`$ sudo bash -c 'echo 100000 > /proc/sys/kernel/threads-max'`
+`$ sudo sysctl kernel.threads-max=100000`
 The /sys pseudofilesystem is more tightly defined that /proc. Most entries contain only one line of text.
 
 `sar` stands for Systems Activity Reporter. It is an all purpose tool for
@@ -447,12 +443,56 @@ multi-threaded applications
 
 ### 13 - MEMORY MONITORING & USAGE
 
-st the primary considerations and tasks involved in memeory tuinign
+list the primary considerations and tasks involved in memory tuning
+Memory usage and I/O throughput are intrinsically related because memory is
+generally being used to cache the contents on disk.
 
-Use entris in /rpoc/ss/vm and decipher /rpoco/meminfo
+It is best practice when tweaking the parameters in `/proc/sys/vm` to adjust
+one thing at a time and look for effects. The primary (inter-related) tasks are:
+* Controlling flushing parameters
+* Controlling swap behavior
+* Controlling how much memory overcommission is allowed
 
-Use vm stat to dispaly information about memory, paign, I/O, processor activit  ad process' memory conumtpiotn
+Memory Monitoring Utilities
 
-Userstand how the OOM-hiller decides when to tkae action and seelcts which processes showuls be exterminated to open up som ememory
+Utility | Purpose
+------- | -------
+free    | Brief summary abt memory usage
+vmstat  | Detailed vm statistics & block I/O, dynamically updated
+pmap    | Process memory map
+
+
+Use entries in /proc/sys/vm and decipher /proc/meminfo
+* `/proc/meminfo` contains information about how memory is being used.
+* `/proc/sys/vm` contains many tunable knobs to control the Virtual Memory system
+    * These values can be changed by directly writing to the entry.
+    * Or by modifying `/etc/sysctl.conf`, to set values at boot time.
+
+`vmstat` is a multi-purpose tool that displays info about memory, paging, I/O,
+processor activity and processes.
+* `vmstat [options] [delay] [count]`
+    * The `-a` option displays info about active and inactive memory
+    * The `-d` option gets a table of disk statistics
+    * The `-p` option shows quick statistics on only one partition
+
+The Linux Kenel permits overcommission of memory. This is only for pages dedicated
+to user processes. Pages used within the kernel are not swappable and are always
+allocated at request time. 
+
+In order to make decisions on what gets sacrified to keep the system alive, the
+badness value is computed form the `/proc/[pid]/oom_score`for each process on
+the system. The order of killing is determined by this value.
+
+
+### 14 - I/O MONITORING and TUNING
+
+Understand the importance o fmonitorign I/O activity and when it constitutes
+sytem performance bottlenecks
+
+Use iostat to monitor system I/O device activity
+
+Use iotop to display a constantly updated table of current I/O usage
+
+Use ionice to set both the I/O scheduling class and the priority for a given process
 
 
