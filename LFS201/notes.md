@@ -523,7 +523,52 @@ Idle             | 3        | No access to disk I/O unless no other program has 
 ### 15 - I/O SCHEDULING
 
 Explain the importance of I/O scheduling and describe the conflicting requirements that need to be satisfied
+The I/O scheduler provides the interface between the generic block layer, and the low-level physical device drivers. Both the VM and VFS layers submit I/O requests to block devices. The job of the I/O scheduling layer is to prioritize and order these requests before they are given to block drivers. It needs to balance hardware access times, latency, deadlines, fairness, and efficiency.
 
-Delineate and contrast the options available under Linux
+The I/O Scheduling has to satisfy conflicting requirements:
+* Hardware access times should be minimized
+* Requests should be merget to the extent possible to get as big a contiguous region as possible (to also minimize disk access time)
+* Request should be satisfied with as low a latency as possible
+* Favor read over write operations (for better parallelism and system responsiveness)
+* Processes should share the I/O bandwidth in a fair, or consciously prioritized fashion so as not to make process throughput suffer.
 
-Understand how the CFQ (Completely Fair Queue) and Deadline algorithms work
+The Linux Kernel has an objected oriented scheme, in which pointers to the various needed functions are supplied in a data structure, which can be selected at boot on the kernel command line as:
+* `linux ... elevaotor=[bfq|deadline-mq|kyber|none]`
+* Before linux kernel 2.6.18, it was AS, then it became CFQ, and it is now deadline-mq
+* It is possible to use different I/O schedulers for different devices
+
+To see which I/O Scheduler are available
+* `cat /sys/block/sda/queue/scheduler` -> none bfq kyber [mq-deadline]
+* Change the value by doing :~> `echo bfq > /sys/block/sda/queue/scheduler`
+* `cat /sys/block/sda/queue/scheduler` -> none [bfq] kyber mq-deadline
+* Scheduler specific tunables can be found in sys/block/sda/queue/iosched
+
+`/sys/block/sda/queue/rotational` can be examined to see if a device is an SSD (1) or not (0).
+
+CFQ (Completely Fair Queue) and Deadline algorithms
+* ***CFQ***
+    * Its goal is to spread equally I/O bandwidth among all process submitting requests
+    * In theory, each process has its own I/O queue, which works together with the dispatch queue which receives the actual requests on the way to the device.
+    * In practice, the number of queues is fixed at 64, and a hash process based on the process ID is used to select a queue when a request is submitted.
+    * Dequeuing of requests is done round robin style on all of the queues (FIFO). This spreads out the work, and to avoid excessive seeking operations, an entire round is selected, and then sorted in the dispatch queue before actual I/O requests are issued to the device.
+
+* ***Deadline***
+    * The Deadline I/O scheduler aggressively reorders requests with the goals of improving overall performance and preventing large latencies for individual requests.
+    * The kernel associates a deadline with each and every request. Read requests get higher priority than write requests.
+    * Five separate I/O queues are maintained:
+        * Two sorted lists, one for reading and one for writing, arranged by starting block
+        * Two FIFO lists, again for reading and writing, sorted by submission time
+        * A 5th queue, called the dispatch queue, which contains requests that are shoveled to the device driver itself
+    * Exactly how the requests are peeled off the fist 4 queues and placed on the 5th one is where the art of the algorithm is.
+
+### 16 - LINUX FILESYSTEM and THE VFS
+
+Explain basic filesystem organization
+
+Understand role of VFS
+
+Know filesystems available in Linux and which ones are used on my system
+
+Grasp why journalling filesystem represent significant advances
+
+Discuss use of special filesystems in Linux

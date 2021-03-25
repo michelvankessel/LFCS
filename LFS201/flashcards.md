@@ -85,4 +85,8 @@ provided by the coreutils package - True
 
 ### 15 - I/O SCHEDULING
 
+* Default I/O Schedulers on Linux - CFQ, Deadline Scheduling, noop
+* Which category of device doesn't require elevator scheduling scheme? - SSD
+
+### 16 - LINUX FILESYSTEMS & THE VFS
 
